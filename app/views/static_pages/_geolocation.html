@@ -1,25 +1,39 @@
-<button id="stop-button">Stop tracking me!</button>
+<button id="stop-button">Stop tracking me!</button><br />
+<button id="start-button">Start tracking me!</button>
 <script>
+  // click handlers
   var stop_butt = document.getElementById('stop-button');
+  var start_butt = document.getElementById('start-button');
   stop_butt.onclick=stopWatch;
+  start_butt.onclick=startWatch;
 
-  var watchId = null;
+  // initialize
+  var watchID = false;
   var options = {
     enableHighAccuracy: true,
     timeout: 5000,
     maximumAge: 0
   }
 
-  // watch current position
-  watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
+  // start monitoring location
+  function startWatch() {
+    if (watchID == false){
+      watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
+    }
+  }
 
+  // stop monitoring location
   function stopWatch() {
-    navigator.geolocation.clearWatch(watchID);
-    console.log("watchID " + watchID + " stopped.");
+    if (watchID){
+      navigator.geolocation.clearWatch(watchID);
+      console.log("watchID " + watchID + " stopped.");
+
+      // reset watchID
+      watchID = false;
+    }
   }
 
   function onSuccess(position) {
-
     console.log(
       'Latitude: '          + position.coords.latitude          + '\n' +
       'Longitude: '         + position.coords.longitude         + '\n' +
@@ -28,10 +42,13 @@
       'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
       'Heading: '           + position.coords.heading           + '\n' +
       'Speed: '             + position.coords.speed             + '\n' +
-      'Timestamp: '         + position.timestamp                + '\n');
+      'Timestamp: '         + position.timestamp                + '\n'
+    );
   };
 
-  function onError(){
-    console.log("Error getting current location");
+  function onError(error){
+    console.log('code: ' + error.code +
+      ' | message: ' + error.message
+    );
   }
 </script>
