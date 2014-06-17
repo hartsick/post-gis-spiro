@@ -1,0 +1,37 @@
+<button id="stop-button">Stop tracking me!</button>
+<script>
+  var stop_butt = document.getElementById('stop-button');
+  stop_butt.onclick=stopWatch;
+
+  var watchId = null;
+  var options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0
+  }
+
+  // watch current position
+  watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
+
+  function stopWatch() {
+    navigator.geolocation.clearWatch(watchID);
+    console.log("watchID " + watchID + " stopped.");
+  }
+
+  function onSuccess(position) {
+
+    console.log(
+      'Latitude: '          + position.coords.latitude          + '\n' +
+      'Longitude: '         + position.coords.longitude         + '\n' +
+      'Altitude: '          + position.coords.altitude          + '\n' +
+      'Accuracy: '          + position.coords.accuracy          + '\n' +
+      'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+      'Heading: '           + position.coords.heading           + '\n' +
+      'Speed: '             + position.coords.speed             + '\n' +
+      'Timestamp: '         + position.timestamp                + '\n');
+  };
+
+  function onError(){
+    console.log("Error getting current location");
+  }
+</script>
