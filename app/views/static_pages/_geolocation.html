@@ -43,9 +43,8 @@
     $('#geo-show').append("</ul>");
     $('#geo-show').append("<br />");
 
-    $.ajax({
-        type: "POST",
-        url: '/user_location.json',
+    $.post({
+        url: '/user_location',
         data: {
           lat: position.coords.latitude,
           lng: position.coords.longitude,

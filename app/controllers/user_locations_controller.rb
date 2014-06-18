@@ -11,10 +11,12 @@ class UserLocationsController < ApplicationController
 		@userlocation = UserLocation.new(strong_params)
 		if @userlocation.save
 			respond_to do |format|
+				format.html #html here
 				format.json {render json: @userlocation, status: :created}
 			end
 		else
 			respond_to do |format|
+				format.html #html here
 				format.json {render json: @userlocation.errors, status: :unprocessable_entity}
 			end
 		end
