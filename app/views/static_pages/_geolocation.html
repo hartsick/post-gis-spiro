@@ -34,17 +34,27 @@
   }
 
   function onSuccess(position) {
-    console.log(
-      'Latitude: '          + position.coords.latitude          + '\n' +
-      'Longitude: '         + position.coords.longitude         + '\n' +
-      'Altitude: '          + position.coords.altitude          + '\n' +
-      'Accuracy: '          + position.coords.accuracy          + '\n' +
-      'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-      'Heading: '           + position.coords.heading           + '\n' +
-      'Speed: '             + position.coords.speed             + '\n' +
-      'Timestamp: '         + position.timestamp                + '\n'
-    );
-  };
+    $('#geo-show').append("<ul>");
+    $('#geo-show').append("<li>New movement detected!</li>");
+    $('#geo-show').append("<li>Latitude: " + position.coords.latitude + "</li>");
+    $('#geo-show').append("<li>Longitude: " + position.coords.longitude + "</li>");
+    $('#geo-show').append("<li>Altitude: " + position.coords.altitude + "</li> ");
+    $('#geo-show').append("<li>Timestamps: " + position.timestamp + "</li>");
+    $('#geo-show').append("</ul>");
+    $('#geo-show').append("<br />");
+    //   <ul>
+    //     <li>New movement detected!</li>
+    //     <li>Latitude: "        + position.coords.latitude + "</li>
+    //     <li>Longitude: "       + position.coords.longitude + "</li>
+    //     <li>Altitude: "        + position.coords.altitude + "</li> 
+    //     <li>Accuracy: "          + position.coords.accuracy          + "</li>
+    //     <li>Altitude Accuracy: " + position.coords.altitudeAccuracy  + "</li>
+    //     <li>Heading: "          + position.coords.heading           + "</li>
+    //     <li>Speed: "          + position.coords.speed             + "</li>
+    //     <li>Timestamps: "        + position.timestamp                + "</li>
+    //   </ul>
+    // ");
+  }
 
   function onError(error){
     console.log('code: ' + error.code +
