@@ -34,6 +34,9 @@ gem 'geocoder'
 # Use Devise for user authentication
 gem 'devise'
 
+# For Heroku compiling
+gem 'rails_12factor'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
