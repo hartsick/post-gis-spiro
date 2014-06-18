@@ -28,6 +28,12 @@ gem 'spring',        group: :development
 # Use PostGIS for location database support
 gem 'activerecord-postgis-adapter'
 
+# Use Geocoder for address lookup
+gem 'geocoder'
+
+# Use Devise for user authentication
+gem 'devise'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
