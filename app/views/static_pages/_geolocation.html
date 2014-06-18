@@ -34,6 +34,7 @@
   }
 
   function onSuccess(position) {
+    // clean this junk up
     $('#geo-show').append("<ul>");
     $('#geo-show').append("<li>New movement detected!</li>");
     $('#geo-show').append("<li>Latitude: " + position.coords.latitude + "</li>");
@@ -43,15 +44,17 @@
     $('#geo-show').append("</ul>");
     $('#geo-show').append("<br />");
 
-    $.post({
-        url: '/user_location',
+    // create a new tracking point for user
+    $.ajax({
+        type: 'POST',
+        url: '/user_locations',
         data: {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
           accuracy: position.coords.accuracy,
-          timestamp: position.timestamp
-        },
-        dataType: 'json'
+          timestamp: position.timestamp,
+          user_id: 1
+        }
       });
   }
 
