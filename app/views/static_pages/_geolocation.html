@@ -5,11 +5,57 @@
   // Display map
   var map;
 
+  // Set map styles
+  var styles = [
+    {
+      featureType: "all",
+      elementType: "geometry",
+      stylers: [
+        { gamma: 1.6 },
+        { lightness: -5 },
+        { saturation: -100 }
+      ]
+    },
+    {
+      featureType: "road",
+      elementType: "geometry",
+      stylers: [
+        { lightness: 100 },
+        { visibility: "simplified" },
+        { gamma: 10 }
+      ]
+    },  
+    {
+      featureType: "transit",
+      elementType: "geometry",
+      stylers: [
+        { visibility: "simplified" },
+        { gamma: 10 },
+        { lightness: 100 }
+      ]
+    },      
+    {
+      featureType: "water",
+      elementType: "geometry",
+      stylers: [
+        { lightness: -30 }
+      ]
+    },    
+    {
+      featureType: "all",
+      elementType: "labels",
+      stylers: [
+        { visibility: "off" }
+      ]
+    }
+  ];
+
   function initialize() {
     // set up map
     var mapOptions = {
-      zoom: 6,
-      center: {lat: 10, lng: 10}
+      zoom: 14,
+      center: {lat: 10, lng: 10},
+      styles: styles
     };
     map = new google.maps.Map(document.getElementById('map-canvas'),
         mapOptions);
@@ -45,17 +91,31 @@
     // prepare marker
     var markerLatlng = {lat: parseFloat(position.coords.latitude), lng: parseFloat(position.coords.longitude)};
 
-    var marker = new google.maps.Marker({
-      position: markerLatlng
-    });
+    // var marker = new google.maps.Marker({
+    //   position: markerLatlng
+    // });
 
-    // place marker and center
-    marker.setMap(map);
+    // // place marker
+    // marker.setMap(map);
+
+    // center map
     map.setCenter(markerLatlng);
 
-    // log some junk
-    console.log(markerLatlng);
-    console.log(marker);
+    // Construct the circle for each value in citymap.
+    // Note: We scale the area of the circle based on the population.
+    var circleOptions = {
+      strokeColor: '#FF0000',
+      strokeOpacity: 0.8,
+      strokeWeight: 1,
+      fillColor: '#FF0000',
+      fillOpacity: 0.35,
+      map: map,
+      center: markerLatlng,
+      radius: 40
+    };
+    // Add the circle for this city to the map.
+    cityCircle = new google.maps.Circle(circleOptions);
+    // }
   }
 
   function onError(error){
