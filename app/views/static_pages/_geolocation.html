@@ -1,49 +1,34 @@
-<button id="stop-button">Stop tracking me!</button><br />
-<button id="start-button">Start tracking me!</button>
-<script>
-  // click handlers
-  var stop_butt = document.getElementById('stop-button');
-  var start_butt = document.getElementById('start-button');
-  stop_butt.onclick=stopWatch;
-  start_butt.onclick=startWatch;
+<div id="map-canvas">
+</div>
 
-  // initialize
-  var watchID = false;
-  var options = {
-    enableHighAccuracy: true,
-    timeout: 5000,
-    maximumAge: 0
+<script>
+  // Display map
+  var map;
+
+  function initialize() {
+    // set up map
+    var mapOptions = {
+      zoom: 6,
+      center: {lat: 10, lng: 10}
+    };
+    map = new google.maps.Map(document.getElementById('map-canvas'),
+        mapOptions);
+
+    // start watching for movement
+    watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
   }
+  google.maps.event.addDomListener(window, 'load', initialize);
+
 
   // start monitoring location
-  function startWatch() {
-    if (watchID == false){
-      watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
-    }
-  }
-
-  // stop monitoring location
-  function stopWatch() {
-    if (watchID){
-      navigator.geolocation.clearWatch(watchID);
-      console.log("watchID " + watchID + " stopped.");
-
-      // reset watchID
-      watchID = false;
-    }
-  }
+  var watchID = false;
+  var options = {    
+    enableHighAccuracy: true,
+    timeout: 10000,
+    maximumAge: 5000
+  };
 
   function onSuccess(position) {
-    // clean this junk up
-    $('#geo-show').append("<ul>");
-    $('#geo-show').append("<li>New movement detected!</li>");
-    $('#geo-show').append("<li>Latitude: " + position.coords.latitude + "</li>");
-    $('#geo-show').append("<li>Longitude: " + position.coords.longitude + "</li>");
-    $('#geo-show').append("<li>Accuracy: " + position.coords.accuracy + "</li> ");
-    $('#geo-show').append("<li>Timestamps: " + position.timestamp + "</li>");
-    $('#geo-show').append("</ul>");
-    $('#geo-show').append("<br />");
-
     // create a new tracking point for user
     $.ajax({
         type: 'POST',
@@ -53,9 +38,24 @@
           lng: position.coords.longitude,
           accuracy: position.coords.accuracy,
           timestamp: position.timestamp,
-          user_id: 1
+          user_id: 2
         }
       });
+
+    // prepare marker
+    var markerLatlng = {lat: parseFloat(position.coords.latitude), lng: parseFloat(position.coords.longitude)};
+
+    var marker = new google.maps.Marker({
+      position: markerLatlng
+    });
+
+    // place marker and center
+    marker.setMap(map);
+    map.setCenter(markerLatlng);
+
+    // log some junk
+    console.log(markerLatlng);
+    console.log(marker);
   }
 
   function onError(error){

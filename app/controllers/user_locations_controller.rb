@@ -8,16 +8,16 @@ class UserLocationsController < ApplicationController
 	end
 
 	def create
+		# convert params to proper data type
 		@lat = params[:lat].to_f
 		@lng = params[:lng].to_f
 		@accuracy = params[:accuracy].to_i
 		@user_id = params[:user_id].to_i
 
+		# instantiate new user location
 		@userlocation = UserLocation.new(lat: @lat, lng: @lng, accuracy: @accuracy, user_id: @user_id)
-		
-		puts @userlocation.lat
-		puts @userlocation.lng
 
+		# save to database
 		if @userlocation.save
 			respond_to do |format|
 				format.html #html here
