@@ -42,18 +42,19 @@
     $('#geo-show').append("<li>Timestamps: " + position.timestamp + "</li>");
     $('#geo-show').append("</ul>");
     $('#geo-show').append("<br />");
-    //   <ul>
-    //     <li>New movement detected!</li>
-    //     <li>Latitude: "        + position.coords.latitude + "</li>
-    //     <li>Longitude: "       + position.coords.longitude + "</li>
-    //     <li>Altitude: "        + position.coords.altitude + "</li> 
-    //     <li>Accuracy: "          + position.coords.accuracy          + "</li>
-    //     <li>Altitude Accuracy: " + position.coords.altitudeAccuracy  + "</li>
-    //     <li>Heading: "          + position.coords.heading           + "</li>
-    //     <li>Speed: "          + position.coords.speed             + "</li>
-    //     <li>Timestamps: "        + position.timestamp                + "</li>
-    //   </ul>
-    // ");
+
+    $.ajax({
+        type: "POST",
+        url: '/user_location/create.json',
+        data: {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+          accuracy: position.coords.accuracy,
+          timestamp: position.timestamp
+          user_id: -1
+        },
+        dataType: 'json'
+      });
   }
 
   function onError(error){

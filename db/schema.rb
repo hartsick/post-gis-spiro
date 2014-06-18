@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 20140617213853) do
   create_table "user_locations", force: true do |t|
     t.float    "lat"
     t.float    "lng"
+    t.integer  "accuracy"
+    t.integer  "timestamp"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"

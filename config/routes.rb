@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
+  get 'user_locations/create'
+
   devise_for :users
+  resources :user_locations
+  
   get 'static_pages/index'
 
   root 'static_pages#index'
