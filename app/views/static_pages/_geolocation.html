@@ -12,10 +12,11 @@
   };
   var isReady = true;
   var markerCounter = 1;
+  var userIdentifier;
 
   // Bind buttons
   $('#session-control').click(function(){
-    // if watchID exists, 
+    // if watchID exists, stop tracking
     if (watchID){
       navigator.geolocation.clearWatch(watchID);
       console.log(watchID, "session ended.");  
@@ -26,10 +27,15 @@
       // update button text
       $(this).text("Start Tracking");
     }
+    // otherwise, start tracking
     else {
       // start watching for movement
       watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
       console.log(watchID, "session started.");
+
+      // set random user identifier
+      userIdentifier = randomInt();
+      console.log("User num:", userIdentifier);
 
       // update button text
       $(this).text("Stop Tracking");
@@ -52,7 +58,7 @@
             lng: position.coords.longitude,
             accuracy: position.coords.accuracy,
             timestamp: position.timestamp,
-            user_id: 2
+            user_id: userIdentifier
           }
         });
 
@@ -104,5 +110,18 @@
     console.log('code: ' + error.code +
       ' | message: ' + error.message
     );
+  }
+
+  function randomInt(){
+    // generate random user identifier
+    var randomNum = Math.floor(Math.random()*2147483648);
+    var randomVal = Math.random();
+
+    // randomly assign negative value
+    if (randomVal > .5){
+      randomNum = randomNum * -1;
+    }
+
+    return randomNum;
   }
 </script>
