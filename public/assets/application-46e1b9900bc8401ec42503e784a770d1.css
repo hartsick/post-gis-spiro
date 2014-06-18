@@ -1,0 +1,54 @@
+/* line 5, /Users/Christa/Documents/_GA/spikes/post-gis-spiro/postSpiro/app/assets/stylesheets/static_pages.css.scss */
+body {
+  height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 12, /Users/Christa/Documents/_GA/spikes/post-gis-spiro/postSpiro/app/assets/stylesheets/static_pages.css.scss */
+#map-canvas {
+  margin: 33px 0 0 0;
+  padding: 0;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+/* line 22, /Users/Christa/Documents/_GA/spikes/post-gis-spiro/postSpiro/app/assets/stylesheets/static_pages.css.scss */
+#controls {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: black;
+  z-index: 100;
+  margin: 0 auto;
+}
+/* line 31, /Users/Christa/Documents/_GA/spikes/post-gis-spiro/postSpiro/app/assets/stylesheets/static_pages.css.scss */
+#controls button {
+  float: left;
+  background-color: #62cbcb;
+  color: white;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 1em;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+
+
+ */
+
